@@ -1,6 +1,7 @@
 package main
 import scala.collection.immutable.List
 import scala.util.Random
+import scala.annotation
 
 object main {
   def main(args: Array[String]) {
@@ -40,6 +41,8 @@ object main {
     val num3 = range.positiveInt(3)
     val num4 = range.positiveInt(4)
     val num5 = range.positiveInt(5)
+    
+    makeExpression()
   }
   
   //finding last nth element in list
@@ -116,5 +119,34 @@ object main {
       (n%100+1, newRng)
     }
   }
+  
+  //making expression
+  def makeExpression(){
+    //generated 5 random numbers
+	  val num1 = range.positiveInt(1)
+    val num2 = range.positiveInt(2)
+    val num3 = range.positiveInt(3)
+    val num4 = range.positiveInt(4)
+    val num5 = range.positiveInt(5)
+    val expectedOutput = 210
+    
+    calcExp(expectedOutput, num1._1, num2._1, num3._1, num4._1, num5._1)
+  }
+  
+  //calculating expression
+  def calcExp(output: Int, num1: Int, num2: Int, num3: Int, num4: Int, num5: Int) = {
+    if (num1+num2+num3+num4+num5 == output)
+      println(num1+"+"+num2+"+"+num3+"+"+num4+"+"+num5)
+    else if (num1-num2-num3-num4-num5 == output)
+      println(num1+"-"+num2+"-"+num3+"-"+num4+"-"+num5)
+    else if (num1/num2+num3*num4+num5 == output)
+      println(num1+"/"+num2+"+"+num3+"*"+num4+"+"+num5)
+    else if (num1+num2/num3*num4-num5 == output)
+      println(num1+"+"+num2+"/"+num3+"+"+num4+"*"+num5)
+    else
+      println("No expression found")
+      
+  }
+  
 }
 
