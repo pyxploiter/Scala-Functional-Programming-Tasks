@@ -1,10 +1,12 @@
 package main
 import scala.collection.immutable.List
+import scala.util.Random
 
 object main {
   def main(args: Array[String]) {
 	  val numList: List[Int] = List(9,11,7,22,5,4,3,2,1)
-	  //testing all functions
+    
+    //testing all functions
 	  println(lastNth(8,numList))
 	  println(lastNthRecursive(6, numList))
 	  
@@ -31,6 +33,13 @@ object main {
 	  println(NAND(false,true))
 	  println(NAND(true,false))
 	  println(NAND(false,false))
+	  
+	  //generated 5 random numbers
+	  val num1 = range.positiveInt(1)
+    val num2 = range.positiveInt(2)
+    val num3 = range.positiveInt(3)
+    val num4 = range.positiveInt(4)
+    val num5 = range.positiveInt(5)
   }
   
   //finding last nth element in list
@@ -85,4 +94,27 @@ object main {
   
   //NAND operation for two logical expressions
   def NAND(n1: Boolean, n2: Boolean): Boolean = !AND(n1,n2)
+  
+  //object for generating random numbers
+  object range {
+    trait RNG {
+      def nextInt: (Int, RNG)
+    }
+
+    case class Simple(seed: Long) extends RNG {
+      def nextInt: (Int, RNG) = {
+        val newSeed = (seed * 0x5DEECE66DL + 0xBL) & 0xFFFFFFFFFFFFL
+        val nextRNG = Simple(newSeed)
+        val n = (newSeed >>> 16).toInt
+        (n, nextRNG)
+      }
+    }
+
+    def positiveInt(seed:Int): (Int, RNG) = {
+      val rng: RNG = Simple(seed)
+      val (n, newRng) = rng.nextInt
+      (n%100+1, newRng)
+    }
+  }
 }
+
