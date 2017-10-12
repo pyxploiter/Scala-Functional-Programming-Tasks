@@ -84,10 +84,7 @@ object main {
   def areCoprime(n1: Int, n2: Int): Boolean = (greatestCommonDivisor(n1,n2) == 1)
   
   //XOR operation for two logical expressions
-  def XOR(n1: Boolean, n2: Boolean): Boolean = {
-      if (n1 == n2) false
-      else true
-    }
+  def XOR(n1: Boolean, n2: Boolean): Boolean = n1 != n2
   
   //AND operation for two logical expressions
   def AND(n1: Boolean, n2: Boolean): Boolean = {
